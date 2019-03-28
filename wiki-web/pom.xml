@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sunghyun</groupId>
-    <artifactId>wiki-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+	<artifactId>wiki-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<parent>
 		<groupId>com.sunghyun</groupId>
 		<artifactId>wiki-web-parent</artifactId>
@@ -17,4 +17,45 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<!-- build 설정 -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources-${environment}</directory>
+			</resource>
+		</resources>
+	</build>
+	<!-- profiles 설정 -->
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<environment>local</environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<environment>dev</environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<environment>prod</environment>
+			</properties>
+		</profile>
+	</profiles>
 </project>
